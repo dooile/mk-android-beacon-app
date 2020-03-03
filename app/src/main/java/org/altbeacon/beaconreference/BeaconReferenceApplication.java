@@ -90,7 +90,7 @@ public class BeaconReferenceApplication extends Application implements Bootstrap
         //
         beaconManager.setEnableScheduledScanJobs(false);
         beaconManager.setBackgroundBetweenScanPeriod(0);
-        beaconManager.setBackgroundScanPeriod(1100);
+        beaconManager.setBackgroundScanPeriod(5000);
 
 
         Log.d(TAG, "setting up background monitoring for beacons and power saving");
