@@ -32,7 +32,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         super.onDestroy();
     }
 
-    @Override 
+    @Override
     protected void onPause() {
         super.onPause();
         beaconManager.unbind(this);
@@ -54,8 +54,10 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                   Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
                   Beacon firstBeacon = beacons.iterator().next();
 
-                  Log.d(TAG,"The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
-                  logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
+                  String message = "The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.";
+                  Log.d(TAG, message);
+                  logToDisplay(message);
+                  NotificationUtils.notifyBeaconHasBeenFound(RangingActivity.this, message);
               }
            }
 
