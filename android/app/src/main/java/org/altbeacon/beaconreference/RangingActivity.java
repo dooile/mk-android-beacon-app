@@ -72,6 +72,10 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                                     Response response = client.newCall(request).execute();
 
                                     NotificationUtils.notifyBeaconHasBeenFound(RangingActivity.this, response.body().string());
+
+                                    try {
+                                        beaconManager.stopRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
+                                    } catch (RemoteException e) {   }
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -89,8 +93,6 @@ public class RangingActivity extends Activity implements BeaconConsumer {
 
         };
         try {
-            beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
-            beaconManager.addRangeNotifier(rangeNotifier);
             beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
             beaconManager.addRangeNotifier(rangeNotifier);
         } catch (RemoteException e) {   }

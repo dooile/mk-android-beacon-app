@@ -1,0 +1,25 @@
+{
+  "name": "mkt-android-beacon-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "yarn react-native start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dooile/mkt-android-beacon-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dooile/mkt-android-beacon-app/issues"
+  },
+  "homepage": "https://github.com/dooile/mkt-android-beacon-app#readme",
+  "dependencies": {
+    "react": "16.9.0",
+    "react-native": "0.61.5"
+  }
+}

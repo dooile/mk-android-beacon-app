@@ -14,6 +14,8 @@ import androidx.core.app.NotificationCompat;
 import android.os.Build;
 import android.util.Log;
 
+import com.facebook.soloader.SoLoader;
+
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.Region;
@@ -33,6 +35,7 @@ public class BeaconReferenceApplication extends Application implements Bootstrap
     private String cumulativeLog = "";
 
     public void onCreate() {
+        SoLoader.init(this, false);
         super.onCreate();
         BeaconManager beaconManager = org.altbeacon.beacon.BeaconManager.getInstanceForApplication(this);
         // Detect the main identifier (UID) frame:
