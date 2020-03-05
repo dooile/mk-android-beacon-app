@@ -65,7 +65,7 @@ public class NotificationUtils {
                 .setContentText(contentText)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setContentIntent(contentIntent(context))
+                .setContentIntent(contentIntent(context, contentText))
                 .setAutoCancel(true);
 
         // COMPLETED (11) If the build version is greater than or equal to JELLY_BEAN and less than OREO,
@@ -83,10 +83,10 @@ public class NotificationUtils {
     // COMPLETED (1) Create a helper method called contentIntent with a single parameter for a Context. It
     // should return a PendingIntent. This method will create the pending intent which will trigger when
     // the notification is pressed. This pending intent should open up the MainActivity.
-    private static PendingIntent contentIntent(Context context) {
+    private static PendingIntent contentIntent(Context context, String contentText) {
         // COMPLETED (2) Create an intent that opens up the MainActivity
         Intent startActivityIntent = new Intent(context, MyReactActivity.class);
-        startActivityIntent.putExtra("test", "success");
+        startActivityIntent.putExtra("data", contentText);
         // COMPLETED (3) Create a PendingIntent using getActivity that:
         // - Take the context passed in as a parameter
         // - Takes an unique integer ID for the pending intent (you can create a constant for

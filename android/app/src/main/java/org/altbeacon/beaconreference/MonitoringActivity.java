@@ -154,9 +154,12 @@ public class MonitoringActivity extends Activity  {
 	}
 
 	public void onRangingClicked(View view) {
-		Intent myIntent = new Intent(this, RangingActivity.class);
+//		Intent myIntent = new Intent(this, RangingActivity.class);
+		Intent myIntent = new Intent(this, MyReactActivity.class);
 		this.startActivity(myIntent);
 	}
+
+
 	public void onEnableClicked(View view) {
 		BeaconReferenceApplication application = ((BeaconReferenceApplication) this.getApplicationContext());
 		if (BeaconManager.getInstanceForApplication(this).getMonitoredRegions().size() > 0) {
