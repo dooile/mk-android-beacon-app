@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AwesomeProject</string>
+    <string name="beacon_reminder_notification_title">ó o beacon ai gente!</string>
+    <string name="main_notification_channel_name">main_notification_channel</string>
+</resources>
