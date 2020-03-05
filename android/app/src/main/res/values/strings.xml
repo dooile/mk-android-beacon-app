@@ -1,8 +1,0 @@
-<resources>
-
-    <string name="app_name">BeaconReference</string>
-    <string name="main_notification_channel_name">primary</string>
-    <string name="beacon_reminder_notification_title">Ó o beacon aí irmão</string>
-    <string name="beacon_reminder_notification_body">achamo um aí</string>
-
-</resources>
