@@ -205,7 +205,8 @@ public class MainApplication extends Application implements ReactApplication, Bo
             if (mainActivity != null) {
                 // If the Monitoring Activity is visible, we log info about the beacons we have
                 // seen on its display
-                logToDisplay("I see a beacon again");
+                Log.d(TAG, "I see a beacon again");
+//                logToDisplay("I see a beacon again");
             } else {
                 // If we have already seen beacons before, but the monitoring activity is not in
                 // the foreground, we send a notification to the user on subsequent detections.
@@ -219,28 +220,28 @@ public class MainApplication extends Application implements ReactApplication, Bo
 
     @Override
     public void didExitRegion(Region region) {
-        logToDisplay("I no longer see a beacon.");
+//        logToDisplay("I no longer see a beacon.");
     }
 
     @Override
     public void didDetermineStateForRegion(int state, Region region) {
-        logToDisplay("Current region state is: " + (state == 1 ? "INSIDE" : "OUTSIDE (" + state + ")"));
+//        logToDisplay("Current region state is: " + (state == 1 ? "INSIDE" : "OUTSIDE (" + state + ")"));
     }
 
     private void sendNotification() {
         NotificationUtils.notifyBeaconHasBeenFound(this, "Ali malucos");
     }
 
-    public void setMainActivity(MainActivity activity) {
-        this.mainActivity = activity;
-    }
-
-    private void logToDisplay(String line) {
-        cumulativeLog += (line + "\n");
-        if (this.mainActivity != null) {
-//            this.mainActivity.updateLog(cumulativeLog);
-        }
-    }
+//    public void setMainActivity(MainActivity activity) {
+//        this.mainActivity = activity;
+//    }
+//
+//    private void logToDisplay(String line) {
+//        cumulativeLog += (line + "\n");
+//        if (this.mainActivity != null) {
+////            this.mainActivity.updateLog(cumulativeLog);
+//        }
+//    }
 
     public String getLog() {
         return cumulativeLog;

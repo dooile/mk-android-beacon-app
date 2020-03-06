@@ -1,6 +1,10 @@
 package com.awesomeproject;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -24,6 +28,8 @@ import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 import java.util.Collection;
+
+import javax.annotation.Nullable;
 
 //public class MainActivity extends Activity  {
 public class MainActivity extends ReactActivity implements BeaconConsumer {
@@ -56,6 +62,8 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
         startRanging();
     }
 
+    int n = 0;
+
     public void startRanging() {
         RangeNotifier rangeNotifier = new RangeNotifier() {
             @Override
@@ -67,8 +75,16 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
                     String message = "The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.";
                     Log.d(TAG, message);
 
-                    NotificationUtils.notifyBeaconHasBeenFound(MainActivity.this, "acho que achei um bicow");
+                    NotificationUtils.notifyBeaconHasBeenFound(MainActivity.this, "acho que achei um bicow" + n);
+                    n++;
 
+                    WritableMap params = Arguments.createMap();
+                    params.putString("eventProperty", message);
+
+                    ReactContext reactContext = getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
+                    if (reactContext != null) {
+                        sendEvent(reactContext, "EventReminder", params);
+                    }
                 }
             }
 
@@ -202,39 +218,6 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
         }
     }
 
-    public void onRangingClicked(View view) {
-//		Intent myIntent = new Intent(this, RangingActivity.class);
-//        Intent myIntent = new Intent(this, MyReactActivity.class);
-//        this.startActivity(myIntent);
-    }
-
-
-    public void onEnableClicked(View view) {
-        MainApplication application = ((MainApplication) this.getApplicationContext());
-        if (BeaconManager.getInstanceForApplication(this).getMonitoredRegions().size() > 0) {
-            application.disableMonitoring();
-//            ((Button) findViewById(R.id.enableButton)).setText("Re-Enable Monitoring");
-        } else {
-//            ((Button) findViewById(R.id.enableButton)).setText("Disable Monitoring");
-            application.enableMonitoring();
-        }
-
-    }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        BeaconReferenceApplication application = ((BeaconReferenceApplication) this.getApplicationContext());
-//        application.setMainActivity(this);
-//        updateLog(application.getLog());
-//    }
-
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        ((BeaconReferenceApplication) this.getApplicationContext()).setMainActivity(null);
-//    }
-
     private void verifyBluetooth() {
 
         try {
@@ -272,16 +255,6 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
 
     }
 
-    public void updateLog(final String log) {
-//        runOnUiThread(new Runnable() {
-//            public void run() {
-//                EditText editText = (EditText) MainActivity.this
-//                        .findViewById(R.id.monitoringText);
-//                editText.setText(log);
-//            }
-//        });
-    }
-
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
      * rendering of the component.
@@ -289,5 +262,13 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
     @Override
     protected String getMainComponentName() {
         return "AwesomeProject";
+    }
+
+    private void sendEvent(ReactContext reactContext,
+                           String eventName,
+                           @Nullable WritableMap params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 }

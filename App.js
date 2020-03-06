@@ -1,34 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+// @ts-check
 
 import React, {Component} from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
   Button,
+  DeviceEventEmitter,
   NativeModules,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
-
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
   DebugInstructions,
+  Header,
+  LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 class App extends Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    DeviceEventEmitter.addListener('EventReminder', event => {
+      console.log({event});
+      // Add your Business Logic over here
+    });
   }
 
   show() {
