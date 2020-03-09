@@ -133,7 +133,8 @@ public class MainApplication extends Application implements ReactApplication, Bo
         // wake up the app when a beacon is seen
         Region region = new Region("backgroundRegion",
                 null, null, null);
-        regionBootstrap = new RegionBootstrap(this, region);
+                // DEV uncomment for beacon
+        // regionBootstrap = new RegionBootstrap(this, region);
 
         // simply constructing this class and holding a reference to it in your custom Application
         // class will automatically cause the BeaconLibrary to save battery whenever the application

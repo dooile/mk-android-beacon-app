@@ -59,7 +59,8 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
 
     @Override
     public void onBeaconServiceConnect() {
-        startRanging();
+      // DEV uncomment for beacon
+        // startRanging();
     }
 
     int n = 0;
