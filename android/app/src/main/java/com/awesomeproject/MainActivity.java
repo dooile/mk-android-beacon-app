@@ -1,6 +1,7 @@
 package com.awesomeproject;
 
-import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactNativeHost;
+import com.reactnativenavigation.NavigationActivity;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -32,7 +33,7 @@ import java.util.Collection;
 import javax.annotation.Nullable;
 
 //public class MainActivity extends Activity  {
-public class MainActivity extends ReactActivity implements BeaconConsumer {
+public class MainActivity extends NavigationActivity implements BeaconConsumer {
 
     protected static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
@@ -82,7 +83,9 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
                     WritableMap params = Arguments.createMap();
                     params.putString("eventProperty", message);
 
-                    ReactContext reactContext = getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
+                    MainApplication appState = ((MainApplication)getApplicationContext());
+                    ReactNativeHost reactNativeHost = appState.getReactNativeHost();
+                    ReactContext reactContext = reactNativeHost.getReactInstanceManager().getCurrentReactContext();
                     if (reactContext != null) {
                         sendEvent(reactContext, "EventReminder", params);
                     }
@@ -256,14 +259,7 @@ public class MainActivity extends ReactActivity implements BeaconConsumer {
 
     }
 
-    /**
-     * Returns the name of the main component registered from JavaScript. This is used to schedule
-     * rendering of the component.
-     */
-    @Override
-    protected String getMainComponentName() {
-        return "AwesomeProject";
-    }
+    
 
     private void sendEvent(ReactContext reactContext,
                            String eventName,

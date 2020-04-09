@@ -58,10 +58,10 @@ class App extends Component {
             <View style={styles.body}>
               <Header />
               {/* <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Botão do amor</Text>
                 <View style={styles.sectionDescription}>
                   <Button title="Press me" onPress={this.show} />
                 </View>
+                <Text style={styles.sectionTitle}>Botão do amor</Text>
                 <View style={styles.sectionDescription}>
                   <Button title="enable me" onPress={this.enable} />
                 </View>
