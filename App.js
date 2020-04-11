@@ -19,7 +19,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import PromoCard from './app/components/PromoCard';
-import { Header } from 'native-base';
+import {Header} from 'native-base';
+import {Router, Stack, Scene} from 'react-native-router-flux';
 
 class App extends Component {
   constructor(props) {
@@ -57,6 +58,25 @@ class App extends Component {
             style={styles.scrollView}>
             <View style={styles.body}>
               <Header />
+
+              <Router>
+                <Stack key="root">
+                  <Scene
+                    key="home"
+                    component={() => (
+                      <View style={styles.sectionContainer}>
+                        <PromoCard />
+                      </View>
+                    )}
+                    title="Home"
+                  />
+                  <Scene
+                    key="register"
+                    component={() => <>Meu pau</>}
+                    title="Register"
+                  />
+                </Stack>
+              </Router>
               {/* <View style={styles.sectionContainer}>
                 <Text style={styles.sectionTitle}>Botão do amor</Text>
                 <View style={styles.sectionDescription}>
@@ -69,9 +89,6 @@ class App extends Component {
                   <Button title="disable me" onPress={this.disable} />
                 </View>
               </View> */}
-              <View style={styles.sectionContainer}>
-                <PromoCard />
-              </View>
             </View>
           </ScrollView>
         </SafeAreaView>
